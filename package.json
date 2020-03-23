@@ -1,0 +1,22 @@
+{
+    "name": "smc-backend",
+    "version": "1.0.0",
+    "description": "Backend of SMC aplication",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Umbesabro/smc-backend.git"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Adam Drag",
+    "license": "Apache2.0",
+    "dependencies": {
+        "express": "4.17.1"
+    },
+    "devDependencies": {
+        "typescript": "3.8.3"
+    }
+}
