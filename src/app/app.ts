@@ -11,9 +11,10 @@ export default class App {
     private httpServer: http.Server;
     public constructor() {
         this.express = express();
+        this.enableHealthCheck();
     }
 
-    private start(): void {
+    public start(): void {
         if (Config.instance().HttpsMode) {
             this.createHttpsServer();
             this.listenHttpsServer();
@@ -38,13 +39,13 @@ export default class App {
 
     private listenHttpServer(): void {
         this.httpServer.listen(Config.instance().Port, () => {
-            console.log('smc-backend http server has started.');
+            console.log(`smc-backend http server is listening on port: ${Config.instance().Port}`);
         })
     }
 
     private listenHttpsServer(): void {
         this.httpsServer.listen(Config.instance().Port, () => {
-            console.log('smc-backend https server has started.')
+            console.log(`smc-backend https is listening on port: ${Config.instance().Port}`)
         })
     }
 
