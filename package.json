@@ -9,7 +9,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "start":"npm run build && node dist/index.js",
+        "start": "npm run build && node dist/index.js",
         "build": "tsc"
     },
     "author": "Adam Drag",
@@ -22,6 +22,13 @@
     },
     "devDependencies": {
         "@types/node": "12.12.2",
-        "typescript": "3.8.3"
+        "@types/chai":"4.2.4",
+        "@types/express":"4.17.3",
+        "chai": "4.2.0",
+        "typescript": "3.0.3",
+        "mocha": "7.1.1",
+        "sinon": "9.0.1",
+        "sinon-chai": "3.5.0",
+        "tslint": "5.20.1"
     }
 }
