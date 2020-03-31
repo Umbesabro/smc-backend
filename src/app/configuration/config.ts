@@ -1,5 +1,6 @@
 import selfsigned from 'selfsigned';
 import fs from 'fs';
+import customEnv from 'custom-env';
 
 export default class Config {
 
@@ -7,7 +8,7 @@ export default class Config {
 
     private host: string;
     private port: string;
-    private https_mode: boolean;
+    private httpsMode: boolean;
     private pathToCert: string;
     private pathToKey: string;
 
@@ -28,7 +29,7 @@ export default class Config {
     }
 
     public get HttpsMode(): boolean {
-        return this.https_mode;
+        return this.httpsMode;
     }
 
     public get PathToCert() {
@@ -41,23 +42,26 @@ export default class Config {
 
     private init() {
         this.loadSystemVariablesFromDotEnv();
-        this.host = process.env.HOST;
-        this.port = process.env.PORT;
-        this.pathToCert = process.env.PATH_TO_CERT;
-        this.pathToKey = process.env.PATH_TO_KEY;
-        this.https_mode = process.env.HTTPS_MODE === 'true';
+        this.assignSystemVariablesToConfigVariables();
 
         if(this.certificatesExist()) {
             this.genertSelfSignedCertificates();
         }
     }
 
+    private assignSystemVariablesToConfigVariables() {
+        this.host = process.env.HOST;
+        this.port = process.env.PORT;
+        this.pathToCert = process.env.PATH_TO_CERT;
+        this.pathToKey = process.env.PATH_TO_KEY;
+        this.httpsMode = process.env.HTTPS_MODE === 'true';
+    }
+
     private loadSystemVariablesFromDotEnv() {
         if (process.env.NODE_ENV) {
-            require('custom-env').env(process.env.NODE_ENV);
-        }
-        else {
-            require('custom-env').env();
+            customEnv.env(process.env.NODE_ENV);
+        } else {
+            customEnv.env();
         }
     }
 
@@ -67,7 +71,7 @@ export default class Config {
 
     private genertSelfSignedCertificates(): void {
         const certsDir = 'certificates';
-        const attributes = [{ name: 'commonName', value: 'smc-backend' }]
+        const attributes = [{ name: 'commonName', value: 'smc-backend' }];
         const pems = selfsigned.generate(attributes, { days: 365 });
         fs.mkdirSync(certsDir, { recursive: true });
         fs.writeFileSync(this.pathToCert, pems.cert);

@@ -8,7 +8,7 @@ export default class InMemoryDatabaseClient implements DatabaseClientApi {
         { code: 'M03', description: 'onion', stock: 70, avgUsage: 12, safetyStock: 40 },
         { code: 'M04', description: 'thyme', stock: 85, avgUsage: 17, safetyStock: 60 },
         { code: 'M05', description: 'oregano', stock: 40, avgUsage: 33, safetyStock: 70 },
-    ]
+    ];
     async getMaterials():Promise<Material[]> {
         return this.materials;
     }

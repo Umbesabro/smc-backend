@@ -1,0 +1,6 @@
+{
+    "mocha-junit-reporter":"mocha-junit-reporter",
+    "mochaJunitReporter": {
+        "mochaFile":"./reports/test.xml"
+    }
+}
