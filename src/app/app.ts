@@ -1,17 +1,20 @@
-import express, { Express } from 'express';
+import express, { Express, Router } from 'express';
 import Config from './configuration/config';
 import https from 'https';
 import http from 'http';
 import fs from 'fs';
+import BaseController from './api/endpoint';
+import bodyParser from 'body-parser';
 
 export default class App {
-    private express: Express;
+    private app: Express;
 
     private httpsServer: https.Server;
     private httpServer: http.Server;
     public constructor() {
-        this.express = express();
+        this.app = express();
         this.enableHealthCheck();
+        this.app.use(bodyParser.json({limit:"10mb"}));
     }
 
     public start(): void {
@@ -24,17 +27,21 @@ export default class App {
         }
     }
 
+    public setRootController(controller: BaseController): void {
+        this.app.use(controller.Path, controller.Router);
+    }
+
     private createHttpsServer(): void {
         this.httpsServer = https.createServer(
             {
                 cert: fs.readFileSync(Config.instance().PathToCert),
                 key: fs.readFileSync(Config.instance().PathToKey)
             },
-            this.express);
+            this.app);
     }
 
     private createHttpServer(): void {
-        this.httpServer = http.createServer(this.express);
+        this.httpServer = http.createServer(this.app);
     }
 
     private listenHttpServer(): void {
@@ -50,6 +57,6 @@ export default class App {
     }
 
     private enableHealthCheck(): void {
-        this.express.get('/healthcheck', (req, res) => res.sendStatus(200));
+        this.app.get('/healthcheck', (req, res) => res.sendStatus(200));
     }
 }

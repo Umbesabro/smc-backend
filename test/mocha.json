@@ -1,6 +1,9 @@
 {
-    "mocha-junit-reporter":"mocha-junit-reporter",
-    "mochaJunitReporter": {
-        "mochaFile":"./reports/test.xml"
+    "reporterEnabled": "tap,xunit,mocha-junit-reporter",
+    "xunitReporterOptions": {
+        "output": "xunit-custom.xml"
+    },
+    "mochaJunitReporterReporterOptions": {
+	"mochaFile": "junit-custom.xml"
     }
 }
