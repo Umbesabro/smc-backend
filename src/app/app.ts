@@ -14,7 +14,7 @@ export default class App {
     public constructor() {
         this.express = express();
         this.enableHealthCheck();
-        this.express.use(bodyParser.json({limit:"10mb"}));
+        this.express.use(bodyParser.json({ limit: "10mb" }));
     }
 
     public start(): void {
@@ -30,7 +30,7 @@ export default class App {
     public setRootController(controller: BaseController): void {
         this.express.use(controller.Path, controller.Router);
     }
-    public getExpress():Express {
+    public getExpress(): Express {
         return this.express;
     }
     private createHttpsServer(): void {

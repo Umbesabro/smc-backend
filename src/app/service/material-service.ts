@@ -1,8 +1,8 @@
 import { Material } from '../model/material';
 import { DatabaseClientApi } from '../client/database-client.api';
-import InMemoryDatabaseClient from '../client/in-memory-database-client';
+import { FileDatabaseClient } from '../client/file-database-client';
 export default class MaterialService {
-    private readonly databaseClient:DatabaseClientApi = new InMemoryDatabaseClient();
+    private readonly databaseClient:DatabaseClientApi = new FileDatabaseClient();
 
     async getMaterials():Promise<Material[]> {
         return await this.databaseClient.getMaterials();

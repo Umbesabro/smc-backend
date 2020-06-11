@@ -11,6 +11,7 @@ export default class Config {
     private httpsMode: boolean;
     private pathToCert: string;
     private pathToKey: string;
+    private appRootPath:string;
 
     public constructor() {
         this.init();
@@ -32,12 +33,16 @@ export default class Config {
         return this.httpsMode;
     }
 
-    public get PathToCert() {
+    public get PathToCert():string {
         return this.pathToCert;
     }
 
-    public get PathToKey() {
+    public get PathToKey():string {
         return this.pathToKey;
+    }
+
+    public get AppRootPath():string {
+        return this.appRootPath;
     }
 
     private init() {
@@ -55,6 +60,7 @@ export default class Config {
         this.pathToCert = process.env.PATH_TO_CERT;
         this.pathToKey = process.env.PATH_TO_KEY;
         this.httpsMode = process.env.HTTPS_MODE === 'true';
+        this.appRootPath = process.env.APP_ROOT_PATH;
     }
 
     private loadSystemVariablesFromDotEnv() {

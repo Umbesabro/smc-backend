@@ -9,7 +9,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "start": "npm run build && node dist/index.js",
+        "start": "env APP_ROOT_PATH=. node dist/index.js",
         "build": "npm run lint && tsc",
         "lint": "tslint -c tslint.json -p tsconfig.json --fix",
         "test": "mocha",
