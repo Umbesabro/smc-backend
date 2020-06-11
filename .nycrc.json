@@ -6,7 +6,7 @@
         "source-map-support/register"
     ],
     "all": true,
-    "clean": false,
+    "clean": true,
     "silent":false,
     "include":"src/**/*.ts",
     "exclude": ["src/index.ts"],

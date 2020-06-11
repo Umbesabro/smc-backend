@@ -1,18 +1,18 @@
 import { IntegrationTools } from './integration-tools';
 import request, { SuperTest, Test } from 'supertest';
 import { expect } from 'chai';
-import materials from '../../data/materials.json';
+import purchaseOrders from '../../data/purchase_orders.json';
 
-describe('Material endpoint integration test', () => {
+describe('Purchase orders endpoint integration test', () => {
     const integrationTools: IntegrationTools = new IntegrationTools();
     const app: SuperTest<Test> = request(integrationTools.getApp());
 
-    it('should get all materials as a response of GET request on /materials/all', async () => {
+    it('should get all purchase orders as a response of GET request on /orders/all', async () => {
         return app
-            .get('/api/v1/materials/all')
+            .get('/api/v1/purchase-orders/all')
             .expect(response => {
                 expect(response.status).to.eql(200);
-                expect(response.body).to.eql(materials);
+                expect(response.body).to.eql(purchaseOrders);
             })
     });
 })
