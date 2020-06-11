@@ -9,6 +9,11 @@
     "clean": true,
     "silent":false,
     "include":"src/**/*.ts",
-    "exclude": ["src/index.ts"],
+    "exclude": [
+        "src/index.ts",
+        "src/app/app.ts",
+        "src/app/configuration/config.ts",
+        "src/app/api/validators/example-validator.ts"
+    ],
     "report-dir":"./reports/coverage"
   }
